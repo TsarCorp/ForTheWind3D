@@ -86,7 +86,7 @@ public class AiController : MonoBehaviour
         float angleInDegrees = Vector3.Angle(facingDirection, vectorToTarget);
         Quaternion rotation = Quaternion.FromToRotation(facingDirection, vectorToTarget);
 
-        print (angleInDegrees);
+        //print (angleInDegrees);
 
         var relativeDirShip = transform.localEulerAngles[1];
 

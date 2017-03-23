@@ -12,7 +12,7 @@ public class dayCycle : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        startRotation = transform.rotation;
+       // startRotation = transform.rotation;
     }
 
     // Update is called once per frame

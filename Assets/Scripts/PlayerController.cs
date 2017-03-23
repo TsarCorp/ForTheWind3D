@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     public float speed;
     public float speedMod;
@@ -14,12 +15,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     public ParticleSystem ps;
     public GameObject shipsWheel;
-    public GameObject sailSprite;
+    //public GameObject sailSprite;
     public static float sailState;
 
-    public Sprite sailSprite0;
-    public Sprite sailSprite1;
-    public Sprite sailSprite2;
+
 
     public static int cannonGroups = 1;
     public static int cannonCount = 4;
@@ -45,6 +44,8 @@ public class PlayerController : MonoBehaviour
 
     public static int Infamy = 0;
 
+   
+
     // Use this for initialization
     void Start()
     {
@@ -60,6 +61,15 @@ public class PlayerController : MonoBehaviour
     // START UPDATE
     void Update()
     {
+
+        //check player locality
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
+
+
         //print(cannonCount);
         seaMotion();
         windMotion();
@@ -104,7 +114,19 @@ public class PlayerController : MonoBehaviour
     //  END UPDATE
 
 
+    public override void OnStartLocalPlayer()
+    {
         
+
+        
+        
+        GetComponentInChildren<Camera>().enabled = true;
+        //Debug.Log(Time.timeSinceLevelLoad + " Starting Local Player Camera: ");
+        
+
+
+    }
+
 
     void windMotion()
     {
@@ -130,20 +152,7 @@ public class PlayerController : MonoBehaviour
 
     void sailStuff()
     {
-        if (sailState == 0)
-        {
-            sailSprite.GetComponent<Image>().sprite = sailSprite0;
-        }
-
-        if (sailState == 1)
-        {
-            sailSprite.GetComponent<Image>().sprite = sailSprite1;
-        }
-
-        if (sailState == 2)
-        {
-            sailSprite.GetComponent<Image>().sprite = sailSprite2;
-        }
+       
 
         //some stuff 
 
